@@ -14,21 +14,21 @@ for tc in range(numOfTC):
             graph[end].append(sta)
         else:
             graph[end] = [sta]
-
     startP = int(input())
     def bfs(startP, distance):
-        if startP in graph.keys():
-            for node in graph[startP]:
-                if node not in result.keys():
-                    result[node] = distance*6
-                    bfs(node, distance+1)
-                elif result[node] > distance*6:
-                    result[node] = distance*6
+        for node in graph[startP]:
+            if node not in result.keys():
+                result[node] = distance*6
+                bfs(node, distance+1)
+            elif result[node] > distance*6:
+                result[node] = distance*6
+                bfs(node, distance+1)
 
     bfs(startP, 1)
-    for index in range(2, numNode+1):
-        if index in result.keys():
-            print(result[index], end=' ')
-        else:
-            print("-1", end=' ')
+    for index in range(1, numNode+1):
+        if index != startP:
+            if index in result.keys():
+                print(result[index], end=' ')
+            else:
+                print("-1", end=' ')
     print()
